@@ -1,0 +1,186 @@
+[
+  {
+    "_id": "6b419a10-013b-4d71-bef7-cee0760a90cc",
+    "colId": "history",
+    "containerId": "",
+    "name": "Crear un mercado",
+    "url": "localhost:3000/market/read",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-28T00:34:57.373Z",
+    "modified": "2022-10-29T21:16:44.384Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"nameMarket\": \"Lider\",\n  \"addressMarket\": \"En una direccion personal y particular\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "0d0a8201-5421-4d57-927d-88f1410b296c",
+    "colId": "history",
+    "containerId": "",
+    "name": "Crear gestiones",
+    "url": "localhost:3000/gestion/create",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-10-28T02:45:57.145Z",
+    "modified": "2022-10-29T15:39:24.984Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n        \"descripcionGestion\": \"Eliminado porque me caia mal\",\n        \"idPublicacion\": \"16f61c53-cc14-44b0-86bf-5e5ebbaa6699\",\n        \"idAdmin\": \"61f2c431-095a-49dc-b64d-bf6276ede5b2\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "066fb4e1-590a-46a7-a927-c9f1a3c293ae",
+    "colId": "history",
+    "containerId": "",
+    "name": "Crear una seccion",
+    "url": "localhost:3000/seccion/read",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-29T21:13:11.309Z",
+    "modified": "2022-10-29T21:25:17.036Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"nombreSeccion\": \"Helado\",\n    \"idProducto\": \"7ba2c999-7d29-42df-b77f-f9625e0965e3\",\n    \"idMarket\": \"9f8a4a6e-caaa-4b6d-9783-c7a9e29109a3\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e257b8bc-a049-46c7-993e-48770c3fdf09",
+    "colId": "history",
+    "containerId": "",
+    "name": "Buscar publicaciones",
+    "url": "localhost:3000/publicacion/read/medianamente malo",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-10-29T21:16:24.162Z",
+    "modified": "2022-11-08T19:03:33.016Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "059a4269-f8ee-4c15-a151-30ffef816fee",
+    "colId": "history",
+    "containerId": "",
+    "name": "Crear producto",
+    "url": "localhost:3000/producto/crear",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-07T22:45:17.228Z",
+    "modified": "2022-11-13T02:42:49.178Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n        \"nombreProducto\": \"no se\",\n        \"marcaProducto\": \"si\",\n        \"tipoProducto\": \"Alimento\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "59d12e78-51b3-41d6-a4e1-6a92c4b856ea",
+    "colId": "history",
+    "containerId": "",
+    "name": "Crear usuario",
+    "url": "localhost:3000/usuario/crear",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-07T22:50:06.053Z",
+    "modified": "2022-11-13T02:41:58.725Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"rutUsuario\": \"21.439.053-4\",\n  \"nombreUsuario\": \"Agustinaaaaaaa\",\n  \"correoUsuario\": \"holasalinasdeajte@alumnos.uv.cl\",\n  \"contrasenaUsuario\": \"kevin72222827\",\n  \"direccionUsuario\": \"En mi caserea\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e6d25406-94ed-4a5c-8d52-2dc07dfe7f6a",
+    "colId": "history",
+    "containerId": "",
+    "name": "Mostrar productos",
+    "url": "localhost:3000/producto/mostrar",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-07T22:54:47.724Z",
+    "modified": "2022-11-13T02:43:00.306Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "0cba7a32-fec0-4f7b-86de-9b1a7760c8d1",
+    "colId": "history",
+    "containerId": "",
+    "name": "Crear publicacion",
+    "url": "localhost:3000/publicacion/crear",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-11-07T22:55:41.043Z",
+    "modified": "2022-11-13T02:43:10.002Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n        \"fotoPublicacion\": \"https://via.placeholder.com/150/f684ab\",\n        \"precioPublicacion\": 500,\n        \"estadoPublicacion\": \"Bueno\",\n        \"tituloPublicacion\": \"Algo\",\n        \"descripcionPublicacion\": \"La encontre en un mal estado para su venta\",\n        \"rutUsuario\": \"21.439.053-4\",\n        \"idProducto\": \"78dd99bb-8433-46fd-9dff-20fb79f892f0\"\n    }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "da508aeb-c3e8-45bb-94da-c9c190a73f85",
+    "colId": "history",
+    "containerId": "",
+    "name": "Correo usuario por rut",
+    "url": "localhost:3000/usuario/read/20.479.055-8",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-08T14:23:55.194Z",
+    "modified": "2022-11-08T18:57:38.752Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "664a8995-46e3-483a-af1b-0ad9f317d134",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/usuario/read/20",
+    "url": "localhost:3000/administrador/read",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-08T14:26:25.662Z",
+    "modified": "2022-11-08T19:18:43.741Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "5878be01-be22-4cf7-8fae-83c5560bd523",
+    "colId": "history",
+    "containerId": "",
+    "name": "Mostrar publicaciones",
+    "url": "localhost:3000/publicacion/read",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-11T13:54:31.000Z",
+    "modified": "2022-11-12T00:35:33.704Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
