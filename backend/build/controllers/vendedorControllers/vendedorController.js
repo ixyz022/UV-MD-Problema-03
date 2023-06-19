@@ -35,12 +35,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postVendedor = exports.getVendedor = void 0;
+exports.deleteVendedor = exports.postVendedor = exports.getVendedor = void 0;
 const models_1 = __importDefault(require("../../models"));
 const v = __importStar(require("./verifVendedor"));
-const vendedor = models_1.default.Vendedor;
+const Vendedor = models_1.default.Vendedor;
 const getVendedor = () => __awaiter(void 0, void 0, void 0, function* () {
-    const vendedores = yield vendedor.findAll({ where: {} });
+    const vendedores = yield Vendedor.findAll({ where: {} });
     return vendedores;
 });
 exports.getVendedor = getVendedor;
@@ -52,3 +52,16 @@ const postVendedor = (object) => {
     return newEntry;
 };
 exports.postVendedor = postVendedor;
+const deleteVendedor = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const vendedor = yield Vendedor.findByPk(id);
+        if (!vendedor) {
+            throw new Error('El vendedor con el ID especificado no existe');
+        }
+        yield vendedor.destroy();
+    }
+    catch (error) {
+        throw new Error('Error al eliminar al vendedor: ' + error.message);
+    }
+});
+exports.deleteVendedor = deleteVendedor;

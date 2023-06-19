@@ -34,8 +34,8 @@ export const deleteProducto = async (id: number): Promise<void> => {
     }
     
     await producto.destroy();
-  } catch (error) {
-    return Promise.reject(new Error('Error al eliminar al producto'));
+  } catch (error: any) {
+    throw new Error('Error al eliminar el producto: ' + error.message);
   }
 };
 

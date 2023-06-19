@@ -45,8 +45,7 @@ router.get('/mostrar', (_req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json(productos);
     }
     catch (error) {
-        console.log(error);
-        return res.json({ msg: 'Error al mostrar los productos' });
+        return res.json({ msg: 'Error al mostrar los productos' + error.message });
     }
 }));
 router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -57,7 +56,17 @@ router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (error) {
         console.log(error);
-        return res.json({ error, msg: 'Error al subir un producto' });
+        return res.json({ msg: 'Error al subir un producto' + error.message });
+    }
+}));
+router.delete('/eliminar/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(req.params.id);
+        yield productoController.deleteProducto(id);
+        return res.json({ msg: 'Producto eliminado correctamente' });
+    }
+    catch (error) {
+        return res.json({ msg: 'Error al eliminar al producto' + error.message });
     }
 }));
 exports.default = router;

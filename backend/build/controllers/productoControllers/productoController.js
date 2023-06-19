@@ -35,12 +35,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postProducto = exports.getProductos = void 0;
+exports.deleteProducto = exports.postProducto = exports.getProductos = void 0;
 const models_1 = __importDefault(require("../../models"));
 const v = __importStar(require("./verifProducto"));
-const producto = models_1.default.Producto;
+const Producto = models_1.default.Producto;
 const getProductos = () => __awaiter(void 0, void 0, void 0, function* () {
-    const productos = yield producto.findAll({ where: {} });
+    const productos = yield Producto.findAll({ where: {} });
     return productos;
 });
 exports.getProductos = getProductos;
@@ -60,3 +60,16 @@ const postProducto = (object) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.postProducto = postProducto;
+const deleteProducto = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const producto = yield Producto.findByPk(id);
+        if (!producto) {
+            throw new Error('El producto con el ID especificado no existe');
+        }
+        yield producto.destroy();
+    }
+    catch (error) {
+        throw new Error('Error al eliminar el producto: ' + error.message);
+    }
+});
+exports.deleteProducto = deleteProducto;

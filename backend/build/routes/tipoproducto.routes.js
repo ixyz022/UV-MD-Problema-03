@@ -45,7 +45,7 @@ router.get('/mostrar', (_req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json(tipoproductos);
     }
     catch (error) {
-        return res.json({ msg: 'Error al mostrar los tipos de los productos', error });
+        return res.json({ msg: 'Error al mostrar los tipos de los productos' + error.message });
     }
 }));
 router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -56,40 +56,18 @@ router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (error) {
         console.log(error);
-        return res.json({ msg: 'Error al subir el nuevo tipo' });
+        return res.json({ msg: 'Error al subir el nuevo tipo' + error.message });
+    }
+}));
+router.delete('/eliminar/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(req.params.id);
+        yield tipoproductoController.deleteTipoproducto(id);
+        return res.json({ msg: 'Tipoproducto eliminado correctamente' });
+    }
+    catch (error) {
+        console.log(error);
+        return res.json({ msg: 'Error al eliminar el tipoproducto' + error.message });
     }
 }));
 exports.default = router;
-/*
-
-router.get("/mostrar/estado", async (req: Request, res: Response) => {
-  try {
-    const publicacionEstado = await tipoproductoController.getTipoproductoByEstado({ ...req.body })
-    return res.json(publicacionEstado)
-  } catch (error) {
-    console.log(error)
-    return res.json({msg: 'Error al mostrar tipoproductos por estado'})
-  }
-})
-
-router.get('/mostrar/tipo', async (req: Request, res: Response) => {
-  try {
-    const publicacionByTipoProducto = await tipoproductoController.getAllpublicacionByTipoProducto({ ...req.body })
-    return res.json(publicacionByTipoProducto)
-  } catch (error) {
-    console.log(error)
-    return res.json({ msg: 'Error al mostrar los productos por un mercado' })
-  }
-})
-
-router.delete('/eliminar', async (req: Request, res: Response) => {
-  try {
-    const record = tipoproductoController.deleteTipoproducto({ ...req.body })
-
-    return res.json({ record, recordRecordmsg: 'Tipoproducto eliminado correctamente' })
-  } catch (error) {
-    console.log(error)
-    return res.json({ msg: 'Error al eliminar al Tipoproducto' })
-  }
-})
-*/ 

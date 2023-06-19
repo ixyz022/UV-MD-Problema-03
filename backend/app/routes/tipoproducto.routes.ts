@@ -8,8 +8,8 @@ router.get('/mostrar', async (_req: Request, res: Response) => {
   try {
     const tipoproductos = await tipoproductoController.getTipoproducto()
     return res.json(tipoproductos)
-  } catch (error) {
-    return res.json({ msg: 'Error al mostrar los tipos de los productos', error })
+  } catch (error: any) {
+    return res.json({ msg: 'Error al mostrar los tipos de los productos'+ error.message})
   }
 })
 
@@ -20,24 +20,25 @@ router.post('/crear', async (req: Request, res: Response) => {
     const record = db.Tipoproducto.create(newTipoproductoEntry)
 
     return res.json({record, msg: 'Subida de tipo exitosa' })
-  } catch (error) {
+  } catch (error: any) {
     console.log(error)
-    return res.json({ msg: 'Error al subir el nuevo tipo' })
+    return res.json({ msg: 'Error al subir el nuevo tipo' + error.message})
   }
 })
 
 router.delete('/eliminar/:id', async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
-    
+    const id = parseInt(req.params.id);
+
     await tipoproductoController.deleteTipoproducto(id);
-    
+
     return res.json({ msg: 'Tipoproducto eliminado correctamente' });
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
-    return Promise.reject(new Error('Error al eliminar al comprador'));
+    return res.json({ msg: 'Error al eliminar el tipoproducto' + error.message});
   }
 });
+
 
 
 export default router

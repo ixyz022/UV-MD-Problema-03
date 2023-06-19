@@ -35,12 +35,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postTipoproducto = exports.getTipoproducto = void 0;
+exports.deleteTipoproducto = exports.postTipoproducto = exports.getTipoproducto = void 0;
 const models_1 = __importDefault(require("../../models"));
 const v = __importStar(require("./verifTipoproducto"));
-const tipoproducto = models_1.default.Tipoproducto;
+const Tipoproducto = models_1.default.Tipoproducto;
 const getTipoproducto = () => __awaiter(void 0, void 0, void 0, function* () {
-    const tipoproductos = yield tipoproducto.findAll({ where: {} });
+    const tipoproductos = yield Tipoproducto.findAll({ where: {} });
     return tipoproductos;
 });
 exports.getTipoproducto = getTipoproducto;
@@ -52,3 +52,16 @@ const postTipoproducto = (object) => {
     return newEntry;
 };
 exports.postTipoproducto = postTipoproducto;
+const deleteTipoproducto = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const tipoProducto = yield Tipoproducto.findByPk(id);
+        if (!tipoProducto) {
+            throw new Error('El tipoProducto con el ID especificado no existe');
+        }
+        yield tipoProducto.destroy();
+    }
+    catch (error) {
+        throw new Error('Error al eliminar al tipoProducto: ' + error.message);
+    }
+});
+exports.deleteTipoproducto = deleteTipoproducto;

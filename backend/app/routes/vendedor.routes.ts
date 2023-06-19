@@ -8,8 +8,8 @@ router.get('/mostrar', async (_req: Request, res: Response) => {
   try {
     const vendedores = await vendedorController.getVendedor()
     return res.json(vendedores)
-  } catch (error) {
-    return res.json({ msg: 'Error al mostrar los vendedores' })
+  } catch (error: any) {
+    return res.json({ msg: 'Error al mostrar los vendedores' + error.message})
   }
 })
 
@@ -21,22 +21,21 @@ router.post('/crear', async (req: Request, res: Response) => {
     const record = db.Vendedor.create(newVendedorEntry)
 
     return res.json({record, msg: 'Subida de vendedor exitosa' })
-  } catch (error) {
+  } catch (error: any) {
     console.log(error)
-    return res.json({ msg: 'Error al subir un vendedor' })
+    return res.json({ msg: 'Error al subir un vendedor'+ error.message })
   }
 })
 
 router.delete('/eliminar/:id', async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(req.params.id);
     
     await vendedorController.deleteVendedor(id);
     
     return res.json({ msg: 'VendeleteVendedor eliminado correctamente' });
-  } catch (error) {
-    console.log(error);
-    return Promise.reject(new Error('Error al eliminar al Vendedor'));
+  } catch (error: any) {
+    return res.json({ msg: 'Error al eliminar al Vendedor'+ error.message});
   }
 });
 

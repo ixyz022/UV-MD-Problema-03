@@ -26,7 +26,8 @@ export const deleteTipoproducto = async (id: number): Promise<void> => {
     }
     
     await tipoProducto.destroy();
-  } catch (error) {
-    return Promise.reject(new Error('Error al eliminar al tipoProducto'));
+  } catch (error: any) {
+    throw new Error('Error al eliminar al tipoProducto: ' + error.message);
   }
 };
+

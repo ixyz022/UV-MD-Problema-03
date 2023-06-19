@@ -61,7 +61,7 @@ const deleteComprador = (id) => __awaiter(void 0, void 0, void 0, function* () {
         yield comprador.destroy();
     }
     catch (error) {
-        return Promise.reject(new Error('Error al eliminar al comprador'));
+        throw new Error('Error al eliminar al comprador: ' + error.message);
     }
 });
 exports.deleteComprador = deleteComprador;

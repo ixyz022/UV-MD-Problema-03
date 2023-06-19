@@ -27,7 +27,7 @@ export const deleteComprador = async (id: number): Promise<void> => {
     }
     
     await comprador.destroy();
-  } catch (error) {
-    return Promise.reject(new Error('Error al eliminar al comprador'));
+  } catch (error: any) {
+    throw new Error('Error al eliminar al comprador: ' + error.message);
   }
 };

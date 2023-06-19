@@ -45,7 +45,7 @@ router.get('/mostrar', (_req, res) => __awaiter(void 0, void 0, void 0, function
         return res.json(vendedores);
     }
     catch (error) {
-        return res.json({ msg: 'Error al mostrar los vendedores' });
+        return res.json({ msg: 'Error al mostrar los vendedores' + error.message });
     }
 }));
 router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -56,7 +56,17 @@ router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (error) {
         console.log(error);
-        return res.json({ msg: 'Error al subir un vendedor' });
+        return res.json({ msg: 'Error al subir un vendedor' + error.message });
+    }
+}));
+router.delete('/eliminar/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(req.params.id);
+        yield vendedorController.deleteVendedor(id);
+        return res.json({ msg: 'VendeleteVendedor eliminado correctamente' });
+    }
+    catch (error) {
+        return res.json({ msg: 'Error al eliminar al Vendedor' + error.message });
     }
 }));
 exports.default = router;
