@@ -12,7 +12,7 @@ export const getProductos = async (): Promise<ProductInterface[]> => {
 export const postProducto = async (object: any): Promise<ProductInterface> => {
   try {
     const newEntry: ProductInterface = {
-      numeroVendedor: await v.parseNumeroVendedor(object.idComprador),
+      numeroVendedor: await v.parseNumeroVendedor(object.numeroVendedor),
       idComprador: await v.parseIdComprador(object.idComprador),
       idTipoProducto: await v.parseIdTipoProducto(object.idTipoProducto),
       precioCompra: await v.parsePrecioCompra(object.precioCompra),

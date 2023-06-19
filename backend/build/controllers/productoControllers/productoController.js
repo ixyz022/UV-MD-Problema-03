@@ -47,7 +47,7 @@ exports.getProductos = getProductos;
 const postProducto = (object) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newEntry = {
-            numeroVendedor: yield v.parseNumeroVendedor(object.idComprador),
+            numeroVendedor: yield v.parseNumeroVendedor(object.numeroVendedor),
             idComprador: yield v.parseIdComprador(object.idComprador),
             idTipoProducto: yield v.parseIdTipoProducto(object.idTipoProducto),
             precioCompra: yield v.parsePrecioCompra(object.precioCompra),

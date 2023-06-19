@@ -20,54 +20,54 @@ const vendedor = models_1.default.Vendedor;
 const parseNumeroVendedor = (NumeroVendedorFromRequest) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const record = yield vendedor.findByPk(NumeroVendedorFromRequest);
-        if (record && !(0, exports.isNumber)(NumeroVendedorFromRequest)) {
+        if (record && (0, exports.isNumber)(NumeroVendedorFromRequest)) {
             // El registro con el PK especificado existe en la tabla
             return NumeroVendedorFromRequest;
         }
         else {
             // El registro con el PK especificado no existe en la tabla
-            throw new Error('El PK del numero vendedor, no existe');
+            return Promise.reject(new Error('El PK del numero vendedor no existe'));
         }
     }
     catch (error) {
         // Error al buscar en la tabla
-        throw new Error('Error al buscar en la tabla de vendedores');
+        return Promise.reject(new Error('Error al buscar en la tabla de vendedores'));
     }
 });
 exports.parseNumeroVendedor = parseNumeroVendedor;
 const parseIdComprador = (IdCompradorFromRequest) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const record = yield comprador.findByPk(IdCompradorFromRequest);
-        if (record && !(0, exports.isNumber)(IdCompradorFromRequest)) {
+        if (record && (0, exports.isNumber)(IdCompradorFromRequest)) {
             // El registro con el PK especificado existe en la tabla
             return IdCompradorFromRequest;
         }
         else {
             // El registro con el PK especificado no existe en la tabla
-            throw new Error('El PK de id del comprador, no existe');
+            return Promise.reject(new Error('El PK del id del comprador no existe'));
         }
     }
     catch (error) {
         // Error al buscar en la tabla
-        throw new Error('Error al buscar en la tabla compradores');
+        return Promise.reject(new Error('Error al buscar en la tabla de compradores'));
     }
 });
 exports.parseIdComprador = parseIdComprador;
 const parseIdTipoProducto = (IdTipoProductoFromRequest) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const record = yield tipoproducto.findByPk(IdTipoProductoFromRequest);
-        if (record && !(0, exports.isNumber)(IdTipoProductoFromRequest)) {
+        if (record && (0, exports.isNumber)(IdTipoProductoFromRequest)) {
             // El registro con el PK especificado existe en la tabla
             return IdTipoProductoFromRequest;
         }
         else {
             // El registro con el PK especificado no existe en la tabla
-            throw new Error('El PK de id del tipo producto, no existe');
+            return Promise.reject(new Error('El PK de id del tipo producto, no existe'));
         }
     }
     catch (error) {
         // Error al buscar en la tabla
-        throw new Error('Error al buscar en la tabla tipo producto');
+        return Promise.reject(new Error('Error al buscar en la tabla tipo producto'));
     }
 });
 exports.parseIdTipoProducto = parseIdTipoProducto;

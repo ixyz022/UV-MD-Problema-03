@@ -116,17 +116,17 @@
     "_id": "396439da-8931-4827-8b7c-ca65948e3a7a",
     "colId": "de25e79d-2519-4dc2-a72f-ce813ec854d4",
     "containerId": "",
-    "name": "Crear productos",
+    "name": "producto/crear",
     "url": "localhost:3000/producto/crear",
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-11-12T08:27:21.095Z",
-    "modified": "2023-06-19T15:27:54.630Z",
+    "modified": "2023-06-19T17:06:35.678Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n    \"numeroVendedor\": 2,\n    \"idComprador\": 1,\n    \"idTipoProducto\": 2,\n    \"precioCompra\": 2000\n  }",
+      "raw": "{\n    \"numeroVendedor\": 2,\n    \"idComprador\": 2,\n    \"idTipoProducto\": 2,\n    \"precioCompra\": 2000\n  }",
       "form": []
     },
     "tests": []

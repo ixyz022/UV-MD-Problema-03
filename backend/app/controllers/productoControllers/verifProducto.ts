@@ -6,35 +6,36 @@ const vendedor = db.Vendedor
 
 export const parseNumeroVendedor = async (NumeroVendedorFromRequest: any): Promise<number> => {
   try {
-    const record = await vendedor.findByPk(NumeroVendedorFromRequest)
+    const record = await vendedor.findByPk(NumeroVendedorFromRequest);
 
-    if (record && ! isNumber(NumeroVendedorFromRequest)) {
+    if (record && isNumber(NumeroVendedorFromRequest)) {
       // El registro con el PK especificado existe en la tabla
-      return NumeroVendedorFromRequest
+      return NumeroVendedorFromRequest;
     } else {
       // El registro con el PK especificado no existe en la tabla
-      throw new Error('El PK del numero vendedor, no existe' );
+      return Promise.reject(new Error('El PK del numero vendedor no existe'));
     }
   } catch (error) {
     // Error al buscar en la tabla
-    throw new Error('Error al buscar en la tabla de vendedores' );
+    return Promise.reject(new Error('Error al buscar en la tabla de vendedores'));
   }
-}
+};
+
 
 export const parseIdComprador = async (IdCompradorFromRequest: any): Promise<number> => {
   try {
     const record = await comprador.findByPk(IdCompradorFromRequest)
 
-    if (record && ! isNumber(IdCompradorFromRequest)) {
+    if (record && isNumber(IdCompradorFromRequest)) {
       // El registro con el PK especificado existe en la tabla
       return IdCompradorFromRequest
     } else {
       // El registro con el PK especificado no existe en la tabla
-      throw new Error('El PK de id del comprador, no existe' );
-    }
+      return Promise.reject(new Error('El PK del id del comprador no existe'));
+  }
   } catch (error) {
     // Error al buscar en la tabla
-    throw new Error('Error al buscar en la tabla compradores' );
+    return Promise.reject(new Error('Error al buscar en la tabla de compradores'));
   }
 }
 
@@ -42,16 +43,16 @@ export const parseIdTipoProducto = async (IdTipoProductoFromRequest: any): Promi
   try {
     const record = await tipoproducto.findByPk(IdTipoProductoFromRequest)
 
-    if (record && ! isNumber(IdTipoProductoFromRequest)) {
+    if (record && isNumber(IdTipoProductoFromRequest)) {
       // El registro con el PK especificado existe en la tabla
       return IdTipoProductoFromRequest
     } else {
       // El registro con el PK especificado no existe en la tabla
-      throw new Error('El PK de id del tipo producto, no existe');
+      return Promise.reject(new Error('El PK de id del tipo producto, no existe'));
     }
   } catch (error) {
     // Error al buscar en la tabla
-    throw new Error('Error al buscar en la tabla tipo producto' );
+    return Promise.reject(new Error('Error al buscar en la tabla tipo producto' ));
   }
 }
 
@@ -63,6 +64,6 @@ export const parsePrecioCompra = (PrecioCompraFromRequest: any): number => {
 }
 
 export const isNumber = (number: any): boolean => {
-  return typeof number=== 'number'
+  return typeof number === 'number'
 }
 
