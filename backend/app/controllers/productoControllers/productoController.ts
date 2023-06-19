@@ -9,13 +9,20 @@ export const getProductos = async (): Promise<ProductInterface[]> => {
   return productos
 }
 
-export const postProducto = (object: any):  ProductInterface => {
-  const newEntry:  ProductInterface = {
-  numeroVendedor: v.parseNumeroVendedor(object.idComprador),
-  idComprador: v.parseIdComprador(object.idComprador),
-  idTipoProducto: v.parseIdTipoProducto(object.idTipoProducto),
-  precioCompra: v.parsePrecioCompra(object.precioCompra),
-  }
+export const postProducto = async (object: any): Promise<ProductInterface> => {
+  try {
+    const newEntry: ProductInterface = {
+      numeroVendedor: await v.parseNumeroVendedor(object.idComprador),
+      idComprador: await v.parseIdComprador(object.idComprador),
+      idTipoProducto: await v.parseIdTipoProducto(object.idTipoProducto),
+      precioCompra: await v.parsePrecioCompra(object.precioCompra),
+    };
 
-  return newEntry
-}
+    return newEntry;
+  } catch (error: any) {
+    // Manejo de errores
+    throw new Error('Error al crear el producto: ' + error.message);
+  }
+};
+
+

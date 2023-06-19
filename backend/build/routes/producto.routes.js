@@ -51,8 +51,8 @@ router.get('/mostrar', (_req, res) => __awaiter(void 0, void 0, void 0, function
 }));
 router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newProductosEntry = productoController.postProducto(Object.assign({}, req.body));
-        const record = models_1.default.Producto.create(newProductosEntry);
+        const newProductosEntry = yield productoController.postProducto(Object.assign({}, req.body)); // Agregar await aquí
+        const record = yield models_1.default.Producto.create(newProductosEntry); // Agregar await aquí
         return res.json({ record, msg: 'Producto subido correctamente' });
     }
     catch (error) {

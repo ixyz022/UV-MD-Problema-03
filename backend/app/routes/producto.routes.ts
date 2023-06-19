@@ -17,15 +17,16 @@ router.get('/mostrar', async (_req: Request, res: Response) => {
 
 router.post('/crear', async (req: Request, res: Response) => {
   try {
-    const newProductosEntry = productoController.postProducto({ ...req.body })
+    const newProductosEntry = await productoController.postProducto({ ...req.body }); // Agregar await aquí
 
-    const record = db.Producto.create(newProductosEntry)
+    const record = await db.Producto.create(newProductosEntry); // Agregar await aquí
 
-    return res.json({ record, msg: 'Producto subido correctamente' })
+    return res.json({ record, msg: 'Producto subido correctamente' });
   } catch (error) {
-    console.log(error)
-    return res.json({ error, msg: 'Error al subir un producto' })
+    console.log(error);
+    return res.json({ error, msg: 'Error al subir un producto' });
   }
-})
+});
+
 
 export default router

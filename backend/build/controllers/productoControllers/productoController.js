@@ -44,13 +44,19 @@ const getProductos = () => __awaiter(void 0, void 0, void 0, function* () {
     return productos;
 });
 exports.getProductos = getProductos;
-const postProducto = (object) => {
-    const newEntry = {
-        numeroVendedor: v.parseNumeroVendedor(object.idComprador),
-        idComprador: v.parseIdComprador(object.idComprador),
-        idTipoProducto: v.parseIdTipoProducto(object.idTipoProducto),
-        precioCompra: v.parsePrecioCompra(object.precioCompra),
-    };
-    return newEntry;
-};
+const postProducto = (object) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const newEntry = {
+            numeroVendedor: yield v.parseNumeroVendedor(object.idComprador),
+            idComprador: yield v.parseIdComprador(object.idComprador),
+            idTipoProducto: yield v.parseIdTipoProducto(object.idTipoProducto),
+            precioCompra: yield v.parsePrecioCompra(object.precioCompra),
+        };
+        return newEntry;
+    }
+    catch (error) {
+        // Manejo de errores
+        throw new Error('Error al crear el producto: ' + error.message);
+    }
+});
 exports.postProducto = postProducto;
