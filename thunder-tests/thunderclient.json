@@ -154,19 +154,14 @@
     "_id": "c96e4e19-1c42-4f5f-b578-1206020b673e",
     "colId": "01c51165-8c6d-4259-a2e6-fd9e209b29f8",
     "containerId": "",
-    "name": "Eliminar usuario",
-    "url": "localhost:3000/usuario/eliminar",
+    "name": "/comprador/eliminar/1",
+    "url": "localhost:3000/comprador/eliminar/1",
     "method": "DELETE",
     "sortNum": 60000,
     "created": "2022-11-12T19:21:03.389Z",
-    "modified": "2022-11-12T19:21:40.123Z",
+    "modified": "2023-06-19T17:25:36.796Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"rutUsuario\": \"20.479.055-8\"\n}",
-      "form": []
-    },
     "tests": []
   },
   {

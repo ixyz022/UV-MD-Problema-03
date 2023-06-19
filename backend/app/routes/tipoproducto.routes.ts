@@ -26,40 +26,18 @@ router.post('/crear', async (req: Request, res: Response) => {
   }
 })
 
+router.delete('/eliminar/:id', async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    
+    await tipoproductoController.deleteTipoproducto(id);
+    
+    return res.json({ msg: 'Tipoproducto eliminado correctamente' });
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(new Error('Error al eliminar al comprador'));
+  }
+});
 
 
 export default router
-
-/*
-
-router.get("/mostrar/estado", async (req: Request, res: Response) => {
-  try {
-    const publicacionEstado = await tipoproductoController.getTipoproductoByEstado({ ...req.body })
-    return res.json(publicacionEstado)
-  } catch (error) {
-    console.log(error)
-    return res.json({msg: 'Error al mostrar tipoproductos por estado'})
-  }
-})
-
-router.get('/mostrar/tipo', async (req: Request, res: Response) => {
-  try {
-    const publicacionByTipoProducto = await tipoproductoController.getAllpublicacionByTipoProducto({ ...req.body })
-    return res.json(publicacionByTipoProducto)
-  } catch (error) {
-    console.log(error)
-    return res.json({ msg: 'Error al mostrar los productos por un mercado' })
-  }
-})
-
-router.delete('/eliminar', async (req: Request, res: Response) => {
-  try {
-    const record = tipoproductoController.deleteTipoproducto({ ...req.body })
-
-    return res.json({ record, recordRecordmsg: 'Tipoproducto eliminado correctamente' })
-  } catch (error) {
-    console.log(error)
-    return res.json({ msg: 'Error al eliminar al Tipoproducto' })
-  }
-})
-*/

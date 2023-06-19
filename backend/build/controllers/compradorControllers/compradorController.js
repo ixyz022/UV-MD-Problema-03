@@ -35,13 +35,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postComprador = exports.getComprador = void 0;
+exports.deleteComprador = exports.postComprador = exports.getComprador = void 0;
 const models_1 = __importDefault(require("../../models"));
 const v = __importStar(require("./verifComprador"));
-const comprador = models_1.default.Comprador;
+const Comprador = models_1.default.Comprador;
 const getComprador = () => __awaiter(void 0, void 0, void 0, function* () {
-    const Compradores = yield comprador.findAll({ where: {} });
-    return Compradores;
+    const compradores = yield Comprador.findAll({ where: {} });
+    return compradores;
 });
 exports.getComprador = getComprador;
 const postComprador = (object) => {
@@ -52,3 +52,16 @@ const postComprador = (object) => {
     return newEntry;
 };
 exports.postComprador = postComprador;
+const deleteComprador = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const comprador = yield Comprador.findByPk(id);
+        if (!comprador) {
+            throw new Error('El comprador con el ID especificado no existe');
+        }
+        yield comprador.destroy();
+    }
+    catch (error) {
+        return Promise.reject(new Error('Error al eliminar al comprador'));
+    }
+});
+exports.deleteComprador = deleteComprador;
