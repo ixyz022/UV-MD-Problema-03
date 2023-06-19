@@ -15,11 +15,11 @@ const app = (0, express_1.default)();
 const PORT = 3000;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json()); // middleware que transforma el req.body a JSON
-models_1.default.sequelize.sync().then(() => {
+models_1.default.sequelize.sync({ force: true }).then(() => {
     app.listen(PORT, () => {
         console.log(`Se escucha en el puerto ${PORT}`);
     });
-});
+}).catch((err) => console.error('Error al sincronizar la base de datos:', err));
 app.get('/', (_req, res) => {
     res.json({ message: 'FELICIDADES LOGRASTE SER FELIZ' });
 });

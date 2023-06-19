@@ -13,7 +13,7 @@ Tipoproducto.init({
   idTipoProducto: {
     primaryKey: true,
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
   },
   descripcionProducto: {
@@ -23,7 +23,7 @@ Tipoproducto.init({
 }, {
   sequelize,
   timestamps: false,
-  modelName: 'tipoproducto',
+  modelName: 'Tipoproducto',
   })
   return Tipoproducto
 }

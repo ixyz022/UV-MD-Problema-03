@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         idTipoProducto: {
             primaryKey: true,
             allowNull: false,
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
         },
         descripcionProducto: {
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         timestamps: false,
-        modelName: 'tipoproducto',
+        modelName: 'Tipoproducto',
     });
     return Tipoproducto;
 };

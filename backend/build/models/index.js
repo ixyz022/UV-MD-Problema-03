@@ -25,15 +25,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
-//const Sequelize = require('sequelize')
 const sequelize_1 = require("sequelize");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/db.config')[env];
 const db = {};
-//import foo = require('foo');
-//require('foo');
-//import foo from 'foo';
 let sequelize;
 if (config.use_env_variable) {
     sequelize = new sequelize_1.Sequelize(process.env[config.use_env_variable], config);
@@ -41,13 +37,19 @@ if (config.use_env_variable) {
 else {
     sequelize = new sequelize_1.Sequelize(config.database, config.username, config.password, config);
 }
-fs.readdirSync(__dirname).filter((file) => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.ts');
-})
-    .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelize, sequelize_1.DataTypes);
+console.log('Todos los archivos en el directorio:', fs.readdirSync(__dirname));
+const modelFiles = fs.readdirSync(__dirname).filter((file) => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+});
+console.log('Archivos de modelo filtrados:', modelFiles);
+modelFiles.forEach((file) => {
+    console.log(`Importando modelo desde el archivo: ${file}`);
+    const modelModule = require(path.join(__dirname, file));
+    const model = modelModule.default ? modelModule.default(sequelize, sequelize_1.DataTypes) : modelModule(sequelize, sequelize_1.DataTypes);
+    console.log(`Modelo importado: ${model.name}`);
     db[model.name] = model;
 });
+console.log('Modelos importados:', Object.keys(db));
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
         db[modelName].associate(db);

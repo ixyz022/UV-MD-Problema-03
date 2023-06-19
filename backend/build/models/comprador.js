@@ -9,15 +9,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
+            primaryKey: true,
         },
         nombreComprador: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
     }, {
         sequelize,
         timestamps: false,
-        modelName: 'Comprador'
+        modelName: 'Comprador',
     });
     return Comprador;
 };
