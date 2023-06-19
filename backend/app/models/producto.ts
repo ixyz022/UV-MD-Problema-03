@@ -5,44 +5,32 @@ import { ProductInterface } from '../interfaces/types'
 module.exports = (sequelize: any, DataTypes: any) => {
 class Producto extends Model <ProductInterface>
   implements ProductInterface {
-  idProducto!: string
-  nombreProducto!: string
-  marcaProducto!: string
-  tipoProducto!: string
-
-  static associate (models: any) {
-    Producto.hasMany(models.Publicacion, {
-      foreignKey: 'idProducto',
-      foreignKeyConstraint: true
-    }),
-    Producto.hasMany(models.Seccion, {
-      foreignKey: 'idProducto',
-      foreignKeyConstraint: true
-    })
-  }
+  numeroVendedor!: number
+  idComprador!: number
+  idTipoProducto!: number
+  precioCompra!: number
 }
 Producto.init({
-  idProducto: {
-    primaryKey: true,
+   numeroVendedor: {
     allowNull: false,
-    type: DataTypes.STRING
+    type: DataTypes.INTEGER,
   },
-  nombreProducto: {
+  idComprador: {
     allowNull: false,
-    type: DataTypes.STRING
+    type: DataTypes.INTEGER,
   },
-  marcaProducto: {
+  idTipoProducto: {
     allowNull: false,
-    type: DataTypes.STRING
+    type: DataTypes.INTEGER,
   },
-  tipoProducto: {
+  precioCompra: {
     allowNull: false,
-    type: DataTypes.STRING
+    type: DataTypes.INTEGER,
   }
 }, {
   sequelize,
   timestamps: false,
-  modelName: 'Producto'
+  modelName: 'producto'
   })
   return Producto
 }

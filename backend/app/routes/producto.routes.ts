@@ -14,25 +14,6 @@ router.get('/mostrar', async (_req: Request, res: Response) => {
   }
 })
 
-router.get('/mostrar/mercado', async (req: Request, res: Response) => {
-  try {
-    const productosByMercado = await productoController.getAllProductosByMercado({... req.body})
-    return res.json(productosByMercado)
-  } catch (error) {
-    console.log(error)
-    return res.json({ msg: 'Error al mostrar los productos por un mercado' })
-  }
-})
-
-router.get('/mostrar/noseccion', async (_req: Request, res: Response) => {
-  try {
-    const productosByNotSeccion = await productoController.getAllProductosByNotSeccion()
-    return res.json(productosByNotSeccion)
-  } catch (error) {
-    console.log(error)
-    return res.json({ msg: 'Error al mostrar los productos por un mercado' })
-  }
-})
 
 router.post('/crear', async (req: Request, res: Response) => {
   try {
@@ -40,10 +21,10 @@ router.post('/crear', async (req: Request, res: Response) => {
 
     const record = db.Producto.create(newProductosEntry)
 
-    return res.json({ record, msg: 'Ingreso de producto correcto' })
+    return res.json({ record, msg: 'Producto subido correctamente' })
   } catch (error) {
     console.log(error)
-    return res.json({ error, msg: 'Error al crear un nuevo producto' })
+    return res.json({ error, msg: 'Error al subir un producto' })
   }
 })
 
