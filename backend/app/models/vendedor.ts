@@ -7,6 +7,16 @@ module.exports = (sequelize: any, DataTypes: any) => {
     implements VendedorInterface {
     numeroVendedor!: number
     nombreVendedor!: string
+
+      // 1:N Vendedor : Producto
+
+    static associate (models: any) {
+      Vendedor.hasMany(models.Producto, {
+        foreignKey: 'numeroVendedor',
+        foreignKeyConstraint: true
+      })
+    }
+
   }
   Vendedor.init({
     numeroVendedor: {

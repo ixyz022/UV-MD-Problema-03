@@ -46,7 +46,7 @@ const getComprador = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.getComprador = getComprador;
 const postComprador = (object) => {
     const newEntry = {
-        idCompra: 0,
+        idComprador: 0,
         nombreComprador: v.parseNombreComprador(object.nombreComprador),
     };
     return newEntry;

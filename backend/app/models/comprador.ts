@@ -4,13 +4,21 @@ import { CompradorInterface } from '../interfaces/types';
 module.exports = (sequelize: any, DataTypes: any) => {
   class Comprador extends Model<CompradorInterface>
     implements CompradorInterface {
-    idCompra!: number;
+    idComprador!: number;
     nombreComprador!: string;
+
+    // 1: N Comprador : Prducto
+    static associate (models: any) {
+      Comprador.hasMany(models.Producto, {
+        foreignKey: 'idComprador',
+        foreignKeyConstraint: true
+      })
+    }
   }
 
   Comprador.init(
     {
-      idCompra: {
+      idComprador: {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,

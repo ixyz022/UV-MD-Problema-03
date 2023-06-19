@@ -9,6 +9,12 @@ class Producto extends Model <ProductInterface>
   idComprador!: number
   idTipoProducto!: number
   precioCompra!: number
+
+    // N: 1 Producto : Vendedor
+    // N: 1 Producto : Tipoproducto
+    // N: 1 Producto : comprador
+
+
 }
 Producto.init({
    numeroVendedor: {

@@ -11,7 +11,7 @@ export const getComprador = async (): Promise< CompradorInterface[]> => {
   
 export const postComprador = (object: any):  CompradorInterface => {
     const newEntry:  CompradorInterface = {
-      idCompra: 0,
+      idComprador: 0,
       nombreComprador: v.parseNombreComprador(object.nombreComprador),
   }
   

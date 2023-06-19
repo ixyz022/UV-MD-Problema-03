@@ -8,6 +8,14 @@ class Tipoproducto extends Model<TipoproductoInterface>
     idTipoProducto!: number
     descripcionProducto!: string
 
+    // 1:N Tipoproducto : Producto
+    static associate (models: any) {
+      Tipoproducto.hasMany(models.Producto, {
+        foreignKey: 'idTipoProducto',
+        foreignKeyConstraint: true
+      })
+    }
+
 }
 Tipoproducto.init({
   idTipoProducto: {

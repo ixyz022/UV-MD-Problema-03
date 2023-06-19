@@ -3,7 +3,7 @@ export interface VendedorInterface {
   nombreVendedor: string
 }
 export interface CompradorInterface {
-  idCompra: number
+  idComprador: number
   nombreComprador: string
 }
 export interface TipoproductoInterface {
