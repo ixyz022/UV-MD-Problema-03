@@ -29,14 +29,26 @@ module.exports = (sequelize: any, DataTypes: any) => {
     numeroVendedor: {
       allowNull: false,
       type: DataTypes.INTEGER,
+      references: {
+        model: 'Vendedor',
+        key: 'numeroVendedor'
+      }
     },
     idComprador: {
       allowNull: false,
       type: DataTypes.INTEGER,
+      references: {
+        model: 'Comprador',
+        key: 'idComprador'
+      }
     },
     idTipoProducto: {
       allowNull: false,
       type: DataTypes.INTEGER,
+      references: {
+        model: 'Tipoproducto',
+        key: 'idTipoproducto'
+      }
     },
     precioCompra: {
       allowNull: false,

@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'informatica';
 const config = require(__dirname + '/../config/db.config')[env];
 const db: any = {};
 
-let sequelize: any;
+let sequelize: Sequelize;
 
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable]!, config);
