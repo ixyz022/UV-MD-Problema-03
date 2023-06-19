@@ -31,6 +31,7 @@ Tipoproducto.init({
 }, {
   sequelize,
   timestamps: false,
+  freezeTableName: true,
   modelName: 'Tipoproducto',
   })
   return Tipoproducto

@@ -11,9 +11,20 @@ class Producto extends Model <ProductInterface>
   precioCompra!: number
 
     // N: 1 Producto : Vendedor
-    // N: 1 Producto : Tipoproducto
-    // N: 1 Producto : comprador
-
+    static associate (models: any) {
+      Producto.belongsTo(models.Vendedor, {
+        foreignKey: 'numeroVendedor',
+        foreignKeyConstraint: true
+      }),
+      Producto.belongsTo(models.Tipoproducto, {
+        foreignKey: 'idTipoProducto',
+        foreignKeyConstraint: true
+      }),
+      Producto.belongsTo(models.Comprador, {
+        foreignKey: 'idComprador',
+        foreignKeyConstraint: true
+      })
+    }
 
 }
 Producto.init({
@@ -36,6 +47,7 @@ Producto.init({
 }, {
   sequelize,
   timestamps: false,
+  freezeTableName: true,
   modelName: 'Producto'
   })
   return Producto
