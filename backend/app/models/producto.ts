@@ -1,17 +1,15 @@
 import { Model } from 'sequelize'
-
 import { ProductInterface } from '../interfaces/types'
 
 module.exports = (sequelize: any, DataTypes: any) => {
-class Producto extends Model <ProductInterface>
-  implements ProductInterface {
-  numeroVendedor!: number
-  idComprador!: number
-  idTipoProducto!: number
-  precioCompra!: number
+  class Producto extends Model<ProductInterface> implements ProductInterface {
+    numeroVendedor!: number
+    idComprador!: number
+    idTipoProducto!: number
+    precioCompra!: number
 
     // N: 1 Producto : Vendedor
-    static associate (models: any) {
+    static associate(models: any) {
       Producto.belongsTo(models.Vendedor, {
         foreignKey: 'numeroVendedor',
         foreignKeyConstraint: true
@@ -25,30 +23,33 @@ class Producto extends Model <ProductInterface>
         foreignKeyConstraint: true
       })
     }
-
-}
-Producto.init({
-   numeroVendedor: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-  },
-  idComprador: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-  },
-  idTipoProducto: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-  },
-  precioCompra: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
   }
-}, {
-  sequelize,
-  timestamps: false,
-  freezeTableName: true,
-  modelName: 'Producto'
+
+  Producto.init({
+    numeroVendedor: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    idComprador: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    idTipoProducto: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    precioCompra: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    }
+  }, {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    modelName: 'Producto'
   })
+
+  Producto.removeAttribute('id');
+  
   return Producto
 }

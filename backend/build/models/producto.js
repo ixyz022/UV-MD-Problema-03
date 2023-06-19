@@ -39,9 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         timestamps: false,
-        id: false,
         freezeTableName: true,
         modelName: 'Producto'
     });
+    Producto.removeAttribute('id');
     return Producto;
 };

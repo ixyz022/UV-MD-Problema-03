@@ -1,19 +1,17 @@
 "use strict";
 module.exports = {
-    development: {
+    home: {
         username: 'root',
-        //password: 'Informatica2022.-',
         password: '7827',
-        //password: '7827',
         database: 'test',
         host: 'localhost',
         dialect: 'mysql'
     },
-    test: {
+    informatica: {
         username: 'root',
-        password: null,
-        database: 'database_test',
-        host: '127.0.0.1',
+        password: 'Informatica2022.-',
+        database: 'test',
+        host: 'localhost',
         dialect: 'mysql'
     },
     production: {
