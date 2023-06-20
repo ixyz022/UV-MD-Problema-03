@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import * as CompradorControllers from '../controllers/compradorControllers/compradorController';
+import * as compradorControllers from '../controllers/compradorControllers/compradorController';
 import db from '../models'
 
 const router = express.Router()
@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get('/mostrar', async (_req: Request, res: Response) => {
   try {
-    const usuarios = await CompradorControllers.getComprador()
+    const usuarios = await compradorControllers.getComprador()
     return res.json(usuarios)
   } catch (error: any) {
     return res.json({ msg: 'Error al mostrar los compradores' + error.message })
@@ -18,7 +18,7 @@ router.get('/mostrar', async (_req: Request, res: Response) => {
 
 router.post('/crear', async (req: Request, res: Response) => {
   try {
-    const newCompradorEntry = CompradorControllers.postComprador({ ...req.body })
+    const newCompradorEntry = compradorControllers.postComprador({ ...req.body })
 
     const record = db.Comprador.create(newCompradorEntry)
 
@@ -32,7 +32,7 @@ router.delete('/eliminar/:id', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     
-    await CompradorControllers.deleteComprador(id);
+    await compradorControllers.deleteComprador(id);
     
     return res.json({ msg: 'Comprador eliminado correctamente' });
   } catch (error: any) {
@@ -40,7 +40,18 @@ router.delete('/eliminar/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.put('/actualizar/:idComprador', async (req: Request, res: Response) => {
+  try {
+    const idComprador = parseInt(req.params.idComprador);
+    const nuevoNombreComprador = req.body.nombreComprador;
 
+    await compradorControllers.updateComprador(idComprador, nuevoNombreComprador);
+
+    return res.json({ msg: 'Comprador actualizado correctamente' });
+  } catch (error: any) {
+    return res.json({ msg: 'Error al actualizar el tipo de producto: ' + error.message });
+  }
+});
 
 export default router
 
@@ -48,7 +59,7 @@ export default router
 /* 
 router.get('/mostrar/correo', async (req: Request, res: Response) => {
   try {
-    const usuarios = await CompradorControllers.getCorreoComprador({... req.body})
+    const usuarios = await compradorControllers.getCorreoComprador({... req.body})
     return res.json(usuarios)
   } catch (error) {
     console.log(error)
@@ -58,7 +69,7 @@ router.get('/mostrar/correo', async (req: Request, res: Response) => {
 
 router.get('/mostrar/admin', async (req: Request, res: Response) => {
   try {
-    const usuarios = await CompradorControllers.getCompradorGestionados({... req.body})
+    const usuarios = await compradorControllers.getCompradorGestionados({... req.body})
     return res.json(usuarios)
   } catch (error) {
     console.log(error)
@@ -68,7 +79,7 @@ router.get('/mostrar/admin', async (req: Request, res: Response) => {
 
 router.get('/mostrar/publicacion', async (_req: Request, res: Response) => {
   try {
-    const usuariosObtenidos = await CompradorControllers.getCompradorByPublicacionesRealizadas()
+    const usuariosObtenidos = await compradorControllers.getCompradorByPublicacionesRealizadas()
     return res.json(usuariosObtenidos)
   } catch (error) {
     console.log(error)
@@ -80,7 +91,7 @@ router.get('/mostrar/publicacion', async (_req: Request, res: Response) => {
 
 router.put('/actualizar/contrasena', async (req: Request, res: Response) => {
   try {
-    const record = CompradorControllers.updateContrasenaComprador({ ...req.body })
+    const record = compradorControllers.updateContrasenaComprador({ ...req.body })
 
     return res.json({ record, recordRecordmsg: 'Contraseña del usuario actualizada correctamente' })
   } catch (error) {
@@ -91,7 +102,7 @@ router.put('/actualizar/contrasena', async (req: Request, res: Response) => {
 
 router.put('/actualizar/direccion', async (req: Request, res: Response) => {
   try {
-    const record = CompradorControllers.updateDireccionComprador({ ...req.body })
+    const record = compradorControllers.updateDireccionComprador({ ...req.body })
 
     return res.json({ record, recordRecordmsg: 'Direccion del usuario actualizada correctamente' })
   } catch (error) {
@@ -102,7 +113,7 @@ router.put('/actualizar/direccion', async (req: Request, res: Response) => {
 
 router.delete('/eliminar', async (req: Request, res: Response) => {
   try {
-    const record = CompradorControllers.deleteComprador({ ...req.body })
+    const record = compradorControllers.deleteComprador({ ...req.body })
 
     return res.json({ record, recordRecordmsg: 'Comprador eliminado correctamente' })
   } catch (error) {

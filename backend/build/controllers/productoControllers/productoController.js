@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProducto = exports.postProducto = exports.getProductos = void 0;
+exports.updateProducto = exports.deleteProducto = exports.postProducto = exports.getProductos = void 0;
 const models_1 = __importDefault(require("../../models"));
 const v = __importStar(require("./verifProducto"));
 const Producto = models_1.default.Producto;
@@ -60,11 +60,11 @@ const postProducto = (object) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.postProducto = postProducto;
-const deleteProducto = (id) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteProducto = (numeroVendedor, idComprador, idTipoProducto) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const producto = yield Producto.findByPk(id);
+        const producto = yield Producto.findOne({ where: { numeroVendedor, idComprador, idTipoProducto } });
         if (!producto) {
-            throw new Error('El producto con el ID especificado no existe');
+            throw new Error('El producto con las columnas especificadas no existe');
         }
         yield producto.destroy();
     }
@@ -73,3 +73,17 @@ const deleteProducto = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.deleteProducto = deleteProducto;
+const updateProducto = (numeroVendedor, idComprador, idTipoProducto, nuevoPrecioCompra) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const producto = yield Producto.findOne({ where: { numeroVendedor, idComprador, idTipoProducto } });
+        if (!producto) {
+            throw new Error('El precio de la compra con el ID especificado no existe');
+        }
+        const precioCompra = v.parsePrecioCompra(nuevoPrecioCompra);
+        yield producto.update({ precioCompra });
+    }
+    catch (error) {
+        throw new Error('Error al actualizar el precio de la compra: ' + error.message);
+    }
+});
+exports.updateProducto = updateProducto;

@@ -39,4 +39,17 @@ router.delete('/eliminar/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.put('/actualizar/:numeroVendedor', async (req: Request, res: Response) => {
+  try {
+    const numeroVendedor = parseInt(req.params.numeroVendedor);
+    const nuevoNombreVendedor = req.body.nombreVendedor;
+
+    await vendedorController.updateVendedor(numeroVendedor, nuevoNombreVendedor);
+
+    return res.json({ msg: 'Nombre del vendedor actualizado correctamente' });
+  } catch (error: any) {
+    return res.json({ msg: 'Error al actualizar el nombre del vendedor: ' + error.message });
+  }
+});
+
 export default router

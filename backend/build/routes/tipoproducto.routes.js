@@ -70,4 +70,15 @@ router.delete('/eliminar/:id', (req, res) => __awaiter(void 0, void 0, void 0, f
         return res.json({ msg: 'Error al eliminar el tipoproducto' + error.message });
     }
 }));
+router.put('/actualizar/:idTipoProducto', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const idTipoProducto = parseInt(req.params.idTipoProducto);
+        const nuevaDescripcion = req.body.descripcionProducto;
+        yield tipoproductoController.updateTipoProducto(idTipoProducto, nuevaDescripcion);
+        return res.json({ msg: 'Tipo de producto actualizado correctamente' });
+    }
+    catch (error) {
+        return res.json({ msg: 'Error al actualizar el tipo de producto: ' + error.message });
+    }
+}));
 exports.default = router;

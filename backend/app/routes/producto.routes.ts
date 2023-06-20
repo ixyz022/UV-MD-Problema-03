@@ -27,15 +27,32 @@ router.post('/crear', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/eliminar/:id', async (req: Request, res: Response) => {
+router.delete('/eliminar/:numeroVendedor/:idComprador/:idTipoProducto', async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id);
-    
-    await productoController.deleteProducto(id);
-    
+    const numeroVendedor = parseInt(req.params.numeroVendedor);
+    const idComprador = parseInt(req.params.idComprador);
+    const idTipoProducto = parseInt(req.params.idTipoProducto);
+
+    await productoController.deleteProducto(numeroVendedor, idComprador, idTipoProducto);
+
     return res.json({ msg: 'Producto eliminado correctamente' });
   } catch (error: any) {
-    return res.json({ msg: 'Error al eliminar al producto'+ error.message});
+    return res.json({ msg: 'Error al eliminar el producto: ' + error.message });
+  }
+});
+
+router.put('/actualizar/:numeroVendedor/:idComprador/:idTipoProducto', async (req: Request, res: Response) => {
+  try {
+    const numeroVendedor = parseInt(req.params.numeroVendedor);
+    const idComprador = parseInt(req.params.idComprador);
+    const idTipoProducto = parseInt(req.params.idTipoProducto);
+    const nuevoPrecioCompra = req.body.precioCompra;
+
+    await productoController.updateProducto(numeroVendedor, idComprador, idTipoProducto, nuevoPrecioCompra);
+
+    return res.json({ msg: 'Precio de la compra actualizado correctamente' });
+  } catch (error: any) {
+    return res.json({ msg: 'Error al actualizar el precio de la compra: ' + error.message });
   }
 });
 

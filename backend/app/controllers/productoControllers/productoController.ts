@@ -25,18 +25,33 @@ export const postProducto = async (object: any): Promise<ProductInterface> => {
   }
 };
 
-export const deleteProducto = async (id: number): Promise<void> => {
+export const deleteProducto = async (numeroVendedor: number, idComprador: number, idTipoProducto: number): Promise<void> => {
   try {
-    const producto = await Producto.findByPk(id);
-    
+    const producto = await Producto.findOne({ where: { numeroVendedor, idComprador, idTipoProducto } });
+
     if (!producto) {
-      throw new Error('El producto con el ID especificado no existe');
+      throw new Error('El producto con las columnas especificadas no existe');
     }
-    
+
     await producto.destroy();
   } catch (error: any) {
     throw new Error('Error al eliminar el producto: ' + error.message);
   }
 };
 
+export const updateProducto = async (numeroVendedor: number, idComprador: number, idTipoProducto: number, nuevoPrecioCompra: string): Promise<void> => {
+  try {
+    const producto = await Producto.findOne({ where: { numeroVendedor, idComprador, idTipoProducto } });
+
+    if (!producto) {
+      throw new Error('El precio de la compra con el ID especificado no existe');
+    }
+
+    const precioCompra = v.parsePrecioCompra(nuevoPrecioCompra);
+
+    await producto.update({ precioCompra });
+  } catch (error: any) {
+    throw new Error('Error al actualizar el precio de la compra: ' + error.message);
+  }
+};
 

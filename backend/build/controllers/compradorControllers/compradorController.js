@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteComprador = exports.postComprador = exports.getComprador = void 0;
+exports.updateComprador = exports.deleteComprador = exports.postComprador = exports.getComprador = void 0;
 const models_1 = __importDefault(require("../../models"));
 const v = __importStar(require("./verifComprador"));
 const Comprador = models_1.default.Comprador;
@@ -65,3 +65,17 @@ const deleteComprador = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.deleteComprador = deleteComprador;
+const updateComprador = (idComprador, nuevoNombreComprador) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const comprador = yield Comprador.findByPk(idComprador);
+        if (!comprador) {
+            throw new Error('El tipo de producto con el ID especificado no existe');
+        }
+        const nombreComprador = v.parseNombreComprador(nuevoNombreComprador);
+        yield comprador.update({ nombreComprador });
+    }
+    catch (error) {
+        throw new Error('Error al actualizar el tipo de producto: ' + error.message);
+    }
+});
+exports.updateComprador = updateComprador;

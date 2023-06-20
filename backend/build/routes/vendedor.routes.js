@@ -69,4 +69,15 @@ router.delete('/eliminar/:id', (req, res) => __awaiter(void 0, void 0, void 0, f
         return res.json({ msg: 'Error al eliminar al Vendedor' + error.message });
     }
 }));
+router.put('/actualizar/:numeroVendedor', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const numeroVendedor = parseInt(req.params.numeroVendedor);
+        const nuevoNombreVendedor = req.body.nombreVendedor;
+        yield vendedorController.updateVendedor(numeroVendedor, nuevoNombreVendedor);
+        return res.json({ msg: 'Nombre del vendedor actualizado correctamente' });
+    }
+    catch (error) {
+        return res.json({ msg: 'Error al actualizar el nombre del vendedor: ' + error.message });
+    }
+}));
 exports.default = router;

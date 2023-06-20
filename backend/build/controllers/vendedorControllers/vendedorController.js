@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteVendedor = exports.postVendedor = exports.getVendedor = void 0;
+exports.updateVendedor = exports.deleteVendedor = exports.postVendedor = exports.getVendedor = void 0;
 const models_1 = __importDefault(require("../../models"));
 const v = __importStar(require("./verifVendedor"));
 const Vendedor = models_1.default.Vendedor;
@@ -65,3 +65,17 @@ const deleteVendedor = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.deleteVendedor = deleteVendedor;
+const updateVendedor = (numeroVendedor, nuevoNombreVendedor) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const vendedor = yield Vendedor.findByPk(numeroVendedor);
+        if (!vendedor) {
+            throw new Error('El nombre del vendedor con el ID especificado no existe');
+        }
+        const nombreVendedor = v.parseNombreVendedor(nuevoNombreVendedor);
+        yield vendedor.update({ nombreVendedor });
+    }
+    catch (error) {
+        throw new Error('Error al actualizar el nombre del vendedor: ' + error.message);
+    }
+});
+exports.updateVendedor = updateVendedor;

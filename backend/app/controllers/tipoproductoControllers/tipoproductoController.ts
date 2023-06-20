@@ -31,3 +31,19 @@ export const deleteTipoproducto = async (id: number): Promise<void> => {
   }
 };
 
+export const updateTipoProducto = async (idTipoProducto: number, nuevaDescripcion: string): Promise<void> => {
+  try {
+    const tipoProducto = await Tipoproducto.findByPk(idTipoProducto);
+
+    if (!tipoProducto) {
+      throw new Error('El tipo de producto con el ID especificado no existe');
+    }
+
+    const descripcionProducto = v.parseDescripcionProducto(nuevaDescripcion);
+
+    await tipoProducto.update({ descripcionProducto });
+  } catch (error: any) {
+    throw new Error('Error al actualizar el tipo de producto: ' + error.message);
+  }
+};
+

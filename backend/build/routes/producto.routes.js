@@ -59,14 +59,29 @@ router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return res.json({ msg: 'Error al subir un producto' + error.message });
     }
 }));
-router.delete('/eliminar/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/eliminar/:numeroVendedor/:idComprador/:idTipoProducto', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = parseInt(req.params.id);
-        yield productoController.deleteProducto(id);
+        const numeroVendedor = parseInt(req.params.numeroVendedor);
+        const idComprador = parseInt(req.params.idComprador);
+        const idTipoProducto = parseInt(req.params.idTipoProducto);
+        yield productoController.deleteProducto(numeroVendedor, idComprador, idTipoProducto);
         return res.json({ msg: 'Producto eliminado correctamente' });
     }
     catch (error) {
-        return res.json({ msg: 'Error al eliminar al producto' + error.message });
+        return res.json({ msg: 'Error al eliminar el producto: ' + error.message });
+    }
+}));
+router.put('/actualizar/:numeroVendedor/:idComprador/:idTipoProducto', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const numeroVendedor = parseInt(req.params.numeroVendedor);
+        const idComprador = parseInt(req.params.idComprador);
+        const idTipoProducto = parseInt(req.params.idTipoProducto);
+        const nuevoPrecioCompra = req.body.precioCompra;
+        yield productoController.updateProducto(numeroVendedor, idComprador, idTipoProducto, nuevoPrecioCompra);
+        return res.json({ msg: 'Precio de la compra actualizado correctamente' });
+    }
+    catch (error) {
+        return res.json({ msg: 'Error al actualizar el precio de la compra: ' + error.message });
     }
 }));
 exports.default = router;

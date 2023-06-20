@@ -36,13 +36,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const CompradorControllers = __importStar(require("../controllers/compradorControllers/compradorController"));
+const compradorControllers = __importStar(require("../controllers/compradorControllers/compradorController"));
 const models_1 = __importDefault(require("../models"));
 const router = express_1.default.Router();
 // ¿Puedo hacer que estas peticiones se realizen unicamente para un usuario logeado?
 router.get('/mostrar', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const usuarios = yield CompradorControllers.getComprador();
+        const usuarios = yield compradorControllers.getComprador();
         return res.json(usuarios);
     }
     catch (error) {
@@ -51,7 +51,7 @@ router.get('/mostrar', (_req, res) => __awaiter(void 0, void 0, void 0, function
 }));
 router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newCompradorEntry = CompradorControllers.postComprador(Object.assign({}, req.body));
+        const newCompradorEntry = compradorControllers.postComprador(Object.assign({}, req.body));
         const record = models_1.default.Comprador.create(newCompradorEntry);
         return res.json({ record, msg: 'Comprador subido correctamente' });
     }
@@ -62,18 +62,29 @@ router.post('/crear', (req, res) => __awaiter(void 0, void 0, void 0, function* 
 router.delete('/eliminar/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(req.params.id);
-        yield CompradorControllers.deleteComprador(id);
+        yield compradorControllers.deleteComprador(id);
         return res.json({ msg: 'Comprador eliminado correctamente' });
     }
     catch (error) {
         return res.json({ msg: 'Error al eliminar al comprador' + error.message });
     }
 }));
+router.put('/actualizar/:idComprador', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const idComprador = parseInt(req.params.idComprador);
+        const nuevoNombreComprador = req.body.nombreComprador;
+        yield compradorControllers.updateComprador(idComprador, nuevoNombreComprador);
+        return res.json({ msg: 'Comprador actualizado correctamente' });
+    }
+    catch (error) {
+        return res.json({ msg: 'Error al actualizar el tipo de producto: ' + error.message });
+    }
+}));
 exports.default = router;
 /*
 router.get('/mostrar/correo', async (req: Request, res: Response) => {
   try {
-    const usuarios = await CompradorControllers.getCorreoComprador({... req.body})
+    const usuarios = await compradorControllers.getCorreoComprador({... req.body})
     return res.json(usuarios)
   } catch (error) {
     console.log(error)
@@ -83,7 +94,7 @@ router.get('/mostrar/correo', async (req: Request, res: Response) => {
 
 router.get('/mostrar/admin', async (req: Request, res: Response) => {
   try {
-    const usuarios = await CompradorControllers.getCompradorGestionados({... req.body})
+    const usuarios = await compradorControllers.getCompradorGestionados({... req.body})
     return res.json(usuarios)
   } catch (error) {
     console.log(error)
@@ -93,7 +104,7 @@ router.get('/mostrar/admin', async (req: Request, res: Response) => {
 
 router.get('/mostrar/publicacion', async (_req: Request, res: Response) => {
   try {
-    const usuariosObtenidos = await CompradorControllers.getCompradorByPublicacionesRealizadas()
+    const usuariosObtenidos = await compradorControllers.getCompradorByPublicacionesRealizadas()
     return res.json(usuariosObtenidos)
   } catch (error) {
     console.log(error)
@@ -105,7 +116,7 @@ router.get('/mostrar/publicacion', async (_req: Request, res: Response) => {
 
 router.put('/actualizar/contrasena', async (req: Request, res: Response) => {
   try {
-    const record = CompradorControllers.updateContrasenaComprador({ ...req.body })
+    const record = compradorControllers.updateContrasenaComprador({ ...req.body })
 
     return res.json({ record, recordRecordmsg: 'Contraseña del usuario actualizada correctamente' })
   } catch (error) {
@@ -116,7 +127,7 @@ router.put('/actualizar/contrasena', async (req: Request, res: Response) => {
 
 router.put('/actualizar/direccion', async (req: Request, res: Response) => {
   try {
-    const record = CompradorControllers.updateDireccionComprador({ ...req.body })
+    const record = compradorControllers.updateDireccionComprador({ ...req.body })
 
     return res.json({ record, recordRecordmsg: 'Direccion del usuario actualizada correctamente' })
   } catch (error) {
@@ -127,7 +138,7 @@ router.put('/actualizar/direccion', async (req: Request, res: Response) => {
 
 router.delete('/eliminar', async (req: Request, res: Response) => {
   try {
-    const record = CompradorControllers.deleteComprador({ ...req.body })
+    const record = compradorControllers.deleteComprador({ ...req.body })
 
     return res.json({ record, recordRecordmsg: 'Comprador eliminado correctamente' })
   } catch (error) {

@@ -39,6 +39,18 @@ router.delete('/eliminar/:id', async (req: Request, res: Response) => {
   }
 });
 
+router.put('/actualizar/:idTipoProducto', async (req: Request, res: Response) => {
+  try {
+    const idTipoProducto = parseInt(req.params.idTipoProducto);
+    const nuevaDescripcion = req.body.descripcionProducto;
+
+    await tipoproductoController.updateTipoProducto(idTipoProducto, nuevaDescripcion);
+
+    return res.json({ msg: 'Tipo de producto actualizado correctamente' });
+  } catch (error: any) {
+    return res.json({ msg: 'Error al actualizar el tipo de producto: ' + error.message });
+  }
+});
 
 
 export default router
