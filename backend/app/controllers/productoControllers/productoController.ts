@@ -55,3 +55,13 @@ export const updateProducto = async (numeroVendedor: number, idComprador: number
   }
 };
 
+export const getProductosDeCompradorPorTipo = async (idComprador: number, idTipoProducto: number): Promise<ProductInterface[]> => {
+
+  const productos = await Producto.findAll({ 
+    where: { 
+      idComprador: idComprador, 
+      idTipoProducto: idTipoProducto 
+    }})
+  return productos;
+}
+

@@ -56,4 +56,18 @@ router.put('/actualizar/:numeroVendedor/:idComprador/:idTipoProducto', async (re
   }
 });
 
+router.get('/consulta/:idComprador/:idTipoProducto', async (req: Request, res: Response) => {
+  try {
+    const idComprador = parseInt(req.params.idComprador);
+    const idTipoProducto = parseInt(req.params.idTipoProducto);
+
+    console.log(idComprador, idTipoProducto)
+
+    const productos = await productoController.getProductosDeCompradorPorTipo(idComprador, idTipoProducto)
+    return res.json(productos)
+  } catch (error: any) {
+    return res.json({ msg: 'Error al mostrar la consulta' + error.message})
+  }
+})
+
 export default router

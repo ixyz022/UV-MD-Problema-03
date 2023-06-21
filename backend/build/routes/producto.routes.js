@@ -84,4 +84,16 @@ router.put('/actualizar/:numeroVendedor/:idComprador/:idTipoProducto', (req, res
         return res.json({ msg: 'Error al actualizar el precio de la compra: ' + error.message });
     }
 }));
+router.get('/consulta', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const idComprador = parseInt(req.params.idComprador);
+        const idTipoProducto = parseInt(req.params.idTipoProducto);
+        console.log(idComprador, idTipoProducto);
+        const productos = yield productoController.getProductosDeCompradorPorTipo(idComprador, idTipoProducto);
+        return res.json(productos);
+    }
+    catch (error) {
+        return res.json({ msg: 'Error al mostrar la consulta' + error.message });
+    }
+}));
 exports.default = router;
